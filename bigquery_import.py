@@ -22,6 +22,7 @@ class Import(webapp2.RequestHandler):
         )
         app_id = app_identity.get_application_id()
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d")
+        timestamp_underscores = datetime.datetime.now().strftime("%Y_%m_%d")
         kinds = self.request.get_all("kind")
         dataset_id = self.request.get("dataset_id")
         assert dataset_id
@@ -44,8 +45,8 @@ class Import(webapp2.RequestHandler):
                         "destinationTable": {
                             "projectId": app_id,
                             "datasetId": dataset_id,
-                            "tableId": "{kind}-{timestamp}".format(
-                                kind=kind, timestamp=timestamp
+                            "tableId": "{kind}_{timestamp}".format(
+                                kind=kind, timestamp=timestamp_underscores
                             ),
                         },
                     },
