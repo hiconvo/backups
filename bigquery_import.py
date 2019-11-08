@@ -31,21 +31,26 @@ class Import(webapp2.RequestHandler):
 
         for kind in kinds:
             request = {
-                "load": {
-                    "sourceUris": [
-                        "{input_url_prefix}/parts-{timestamp}/all_namespaces/kind_{kind}/all_namespaces_kind_{kind}.export_metadata".format(
-                            input_url_prefix=input_url_prefix,
-                            timestamp=timestamp,
-                            kind=kind,
-                        )
-                    ],
-                    "destinationTable": {
-                        "projectId": app_id,
-                        "datasetId": dataset_id,
-                        "tableId": "{kind}-{timestamp}".format(
-                            kind=kind, timestamp=timestamp
-                        ),
+                "configuration": {
+                    "load": {
+                        "sourceUris": [
+                            "{input_url_prefix}/parts-{timestamp}/all_namespaces/kind_{kind}/all_namespaces_kind_{kind}.export_metadata".format(
+                                input_url_prefix=input_url_prefix,
+                                timestamp=timestamp,
+                                kind=kind,
+                            )
+                        ],
+                        "sourceFormat": "DATASTORE_BACKUP",
+                        "schemaUpdateOptions": "WRITE_TRUNCATE",
+                        "destinationTable": {
+                            "projectId": app_id,
+                            "datasetId": dataset_id,
+                            "tableId": "{kind}-{timestamp}".format(
+                                kind=kind, timestamp=timestamp
+                            ),
+                        },
                     },
+                    "dryRun": False,
                 }
             }
             headers = {
