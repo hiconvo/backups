@@ -8,13 +8,14 @@ from google.appengine.api import app_identity
 from google.appengine.api import urlfetch
 
 
+# Calls the Datastore export api to export data to the given bucket
 class Export(webapp2.RequestHandler):
     def get(self):
         access_token, _ = app_identity.get_access_token(
             "https://www.googleapis.com/auth/datastore"
         )
         app_id = app_identity.get_application_id()
-        timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d")
 
         output_url_prefix = self.request.get("output_url_prefix")
         assert output_url_prefix and output_url_prefix.startswith("gs://")
