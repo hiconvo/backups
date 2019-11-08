@@ -58,8 +58,7 @@ class Import(webapp2.RequestHandler):
                 "Authorization": "Bearer " + access_token,
             }
             url = (
-                "https://bigquery.googleapis.com/upload/bigquery/v2/projects/%s/jobs"
-                % app_id
+                "https://bigquery.googleapis.com/bigquery/v2/projects/%s/jobs" % app_id
             )
             try:
                 result = urlfetch.fetch(
