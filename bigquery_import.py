@@ -41,6 +41,7 @@ class Import(webapp2.RequestHandler):
                             )
                         ],
                         "sourceFormat": "DATASTORE_BACKUP",
+                        "writeDisposition": "WRITE_TRUNCATE",
                         "destinationTable": {
                             "projectId": app_id,
                             "datasetId": dataset_id,
